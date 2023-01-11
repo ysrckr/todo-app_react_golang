@@ -12,4 +12,5 @@
 *.local
 .env
 .env.*
+data/db/*
 data/*
