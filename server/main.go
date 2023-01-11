@@ -35,9 +35,9 @@ func main() {
 		return c.SendString("OK")
 	})
 
-	// app.Post("/api/v1/todos", routes.CreateTodo)
+	app.Post("/api/v1/todos", routes.CreateTodo)
 
-	// app.Get("/api/v1/todos", routes.GetTodos)
+	app.Get("/api/v1/todos", routes.GetTodos)
 	// app.Get("/api/v1/todos/:id", routes.GetTodo)
 
 	// app.Put("/api/v1/todos/:id", routes.UpdateTodo)
