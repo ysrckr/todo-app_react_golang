@@ -1,3 +1,6 @@
+
+data/*
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -12,5 +15,3 @@
 *.local
 .env
 .env.*
-data/db/*
-data/*
