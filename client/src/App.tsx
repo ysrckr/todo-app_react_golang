@@ -1,7 +1,8 @@
 import { FC } from 'react';
+import { TodoList } from './components/TodoList';
 
 export const App: FC = () => (
   <div>
-    <h1>Hello World</h1>
+    <TodoList />
   </div>
 );
