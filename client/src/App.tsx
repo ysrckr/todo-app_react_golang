@@ -5,24 +5,21 @@ import { ToastContainer } from 'react-toastify';
 import { signal } from '@preact/signals-react';
 import { AddTodo } from './components/AddTodo';
 
-export const isOpen = signal(false)
+export const isOpen = signal(false);
 
 export const App: FC = () => {
-
- 
-
   return (
     <div>
       <TodoList />
 
-    <AddTodo />
+      <AddTodo />
 
       <Group
         position="center"
         style={{ marginTop: 60 }}
       >
         <Button
-          onClick={() => isOpen.value = true}
+          onClick={() => (isOpen.value = true)}
           color="violet"
           radius="md"
           size="lg"
