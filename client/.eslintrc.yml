@@ -28,5 +28,16 @@ rules:
     'jsx-quotes': [2, 'prefer-double'],
     'no-trailing-spaces':
       ['error', { 'ignoreComments': true, 'prefer-template': true }],
+    'sort-imports':
+      [
+        'error',
+        {
+          'ignoreCase': false,
+          'ignoreDeclarationSort': false,
+          'ignoreMemberSort': false,
+          'memberSyntaxSortOrder': ['none', 'all', 'multiple', 'single'],
+          'allowSeparatedGroups': false,
+        },
+      ],
   }
 settings: { 'import/resolver': { 'typescript': {} } }
