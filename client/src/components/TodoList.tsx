@@ -7,9 +7,7 @@ export const TodoList = () => {
   const { data: todos, isLoading } = useGetTodos();
   return (
     <div>
-      <h1
-        className="text-purple-500 text-center text-3xl font-bold mb-10 mt-5"
-      >
+      <h1 className="text-purple-500 text-center text-3xl font-bold mb-10 mt-5">
         Todo List
       </h1>
 

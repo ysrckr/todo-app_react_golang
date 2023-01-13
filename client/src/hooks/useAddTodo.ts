@@ -1,13 +1,12 @@
-import { deleteTodo } from "../calls/deleteTodo";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { addTodo } from "../calls/addTodo";
+import { Todo } from "../types";
 
-
-
-export const useDeleteTodo = () => {
+export const useAddTodo = () => {
   const queryClient = useQueryClient();
-  return useMutation(deleteTodo, {
+  return useMutation({
+    mutationFn: (todo: Omit<Todo, "_id">) => addTodo(todo),
     onSuccess: () => {
-      // Invalidate and refetch
       queryClient.invalidateQueries(["todos"]);
     }
   });
