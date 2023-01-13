@@ -14,10 +14,7 @@ import (
 
 
 func DBinstance() *mongo.Client {
-	err := godotenv.Load(
-		"./.env.local",
-		"./.env",
-	)
+	err := godotenv.Load()
 	
 	if err != nil {
 		log.Fatal("Error loading .env file")

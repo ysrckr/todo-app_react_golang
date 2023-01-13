@@ -4,7 +4,11 @@ import { useGetTodos } from '../hooks/useGetTodos';
 import { Loader } from '@mantine/core';
 
 export const TodoList = () => {
-  const { data: todos, isLoading } = useGetTodos();
+  const { data: todos, isLoading, isError } = useGetTodos();
+  if (isError) {
+    return <div>Something went wrong</div>;
+  }
+
   return (
     <div>
       <h1 className="text-purple-500 text-center text-3xl font-bold mb-10 mt-5">
@@ -24,7 +28,7 @@ export const TodoList = () => {
         {isLoading ? (
           <Loader />
         ) : (
-          todos?.map(todo => (
+          todos.map(todo => (
             <TodoItem
               key={todo._id}
               todo={todo}
