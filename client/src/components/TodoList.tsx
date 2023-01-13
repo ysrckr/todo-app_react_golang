@@ -2,11 +2,12 @@ import { Container } from '@mantine/core';
 import { TodoItem } from './TodoItem';
 import { useGetTodos } from '../hooks/useGetTodos';
 import { Loader } from '@mantine/core';
+import { Error } from './Error';
 
 export const TodoList = () => {
   const { data: todos, isLoading, isError } = useGetTodos();
   if (isError) {
-    return <div>Something went wrong</div>;
+    return <Error />;
   }
 
   return (
@@ -19,11 +20,11 @@ export const TodoList = () => {
         size="md"
         px="xs"
       >
-        <div className="grid grid-cols-6 text-center border border-black">
-          <div className="text-purple-700">Completed</div>
+        <div className="grid grid-cols-6 text-center border-black shadow">
+          <div className="text-purple-700 border">Completed</div>
           <div className="border col-span-2">Title</div>
           <div className="border col-span-2">Body</div>
-          <div></div>
+          <div className="border">Delete</div>
         </div>
         {isLoading ? (
           <Loader />

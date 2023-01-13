@@ -1,5 +1,5 @@
 import { TodoList } from './components/TodoList';
-import { Group, Button } from '@mantine/core';
+import { Group, Button, Container } from '@mantine/core';
 import { ToastContainer } from 'react-toastify';
 import { signal } from '@preact/signals-react';
 import { AddTodo } from './components/AddTodo';
@@ -8,7 +8,7 @@ export const isOpen = signal(false);
 
 export const App = () => {
   return (
-    <div>
+    <Container>
       <TodoList />
 
       <AddTodo />
@@ -40,6 +40,6 @@ export const App = () => {
         pauseOnHover
         theme="light"
       />
-    </div>
+    </Container>
   );
 };

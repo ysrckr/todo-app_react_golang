@@ -16,7 +16,7 @@ export const TodoItem: FC<TodoItemProps> = ({ todo }) => {
   const toggleCompleted = useToggleTodoStatus();
 
   return (
-    <div className="grid grid-cols-6 text-center">
+    <div className="grid grid-cols-6 text-center border-b">
       <div className="text-purple-700">
         <button
           className="p-4"
