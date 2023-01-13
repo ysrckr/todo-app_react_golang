@@ -12,9 +12,10 @@ const instance = axios.create({
 });
 
 export const toggleTodoStatus = async (body: Todo) => {
-  await instance.patch<Todo>(`/${body._id}`, {
+  const { data } = await instance.patch<Todo>(`/${body._id}`, {
     completed: body.completed,
     title: body.title,
     body: body.body,
   });
+  return data;
 };

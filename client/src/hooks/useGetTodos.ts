@@ -1,7 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import { Todo } from '../types';
 import { getTodos } from '../calls/getTodos';
+import { toast } from 'react-toastify';
 
 export const useGetTodos = () => {
-  return useQuery<Todo[]>(['todos'], getTodos);
+  return useQuery({
+    queryKey: ['todos'],
+    queryFn: () => getTodos(),
+    onError: (error: Error) => {
+      toast.error(error.message);
+    },
+  });
 };
