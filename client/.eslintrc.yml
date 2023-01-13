@@ -25,8 +25,12 @@ rules:
     'camelcase': 'error',
     'spaced-comment': 'error',
     'quotes': ['error', 'single'],
-    'no-duplicate-imports': 'error',
-    'no-unreachable': 'error',
+    'no-duplicate-imports': ['error', 'includeExports': true],
+    'no-unused-vars': ["error", {
+      'vars': 'all',
+      'args': 'after-used',
+      'ignoreRestSiblings': false
+    }],
     'keyword-spacing': ['before', true],
     'jsx-quotes': [2, 'prefer-double'],
     'no-trailing-spaces':
@@ -42,6 +46,6 @@ rules:
           'allowSeparatedGroups': false,
         },
       ],
-      "import/no-unresolved": "error"
+    'import/no-unresolved': 'error',
   }
 settings: { 'import/resolver': { 'typescript': { true } } }
