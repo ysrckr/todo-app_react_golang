@@ -1,4 +1,3 @@
-import { FC, useState } from 'react';
 import { TodoList } from './components/TodoList';
 import { Group, Button } from '@mantine/core';
 import { ToastContainer } from 'react-toastify';
@@ -7,7 +6,7 @@ import { AddTodo } from './components/AddTodo';
 
 export const isOpen = signal(false);
 
-export const App: FC = () => {
+export const App = () => {
   return (
     <div>
       <TodoList />
@@ -31,7 +30,7 @@ export const App: FC = () => {
 
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={false}

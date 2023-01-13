@@ -2,7 +2,7 @@ import { useAddTodo } from '../hooks/useAddTodo';
 import { useState } from 'react';
 import { TextInput, Textarea, Modal, Group, Button } from '@mantine/core';
 import { isOpen } from '../App';
-
+import { toast } from 'react-toastify';
 
 export const AddTodo = () => {
   const [title, setTitle] = useState('');
@@ -11,6 +11,11 @@ export const AddTodo = () => {
   const addTodoMutation = useAddTodo();
 
   const handleAddTodo = () => {
+    if (!title || !body) {
+      toast.error('Please fill in all fields');
+      return;
+    }
+
     addTodoMutation.mutate({ title, body });
     isOpen.value = false;
     setTitle('');
@@ -20,7 +25,7 @@ export const AddTodo = () => {
   return (
     <Modal
       opened={isOpen.value}
-      onClose={() => isOpen.value = false}
+      onClose={() => (isOpen.value = false)}
       title="Add a new todo"
       centered
       size={400}
