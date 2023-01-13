@@ -6,6 +6,6 @@ const axiosInstance = axios.create({
 });
 
 export const addTodo = async (todo: Omit<Todo, '_id' | 'completed'>) => {
-  const { data } = await axiosInstance.post('', todo);
+  const { data } = await axiosInstance.post('/', todo);
   return data;
 };

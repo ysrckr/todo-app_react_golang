@@ -8,5 +8,5 @@ const instance = axios.create({
 });
 
 export const deleteTodo = async (id: string) => {
-  await instance.delete(`${baseUrl}${id}`);
+  await instance.delete(`${baseUrl}/${id}`);
 }
