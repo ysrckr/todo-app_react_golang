@@ -48,7 +48,7 @@ On production frontend is hosted on Netlify.
 
 Backend build with Go and Fiber.
 
-On production backend is hosted on Render.com.
+On production backend is hosted on Render.
 
 ## Database
 

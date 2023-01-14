@@ -23,7 +23,7 @@ export const TodoList = () => {
         <div className="grid grid-cols-6 text-center border-black shadow">
           <div className="text-purple-700 border">Completed</div>
           <div className="border col-span-2">Title</div>
-          <div className="border col-span-2">Body</div>
+          <div className="border col-span-2">Content</div>
           <div className="border">Delete</div>
         </div>
         {isLoading ? (
