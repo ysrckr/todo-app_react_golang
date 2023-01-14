@@ -25,10 +25,12 @@ export const TodoColumn: FC<TodoColumnProps> = ({
 }) => {
   const { data: todo, isError, isLoading } = useGetTodo(id);
 
+
+
   return (
     <div
       className={cn('col-span-2 p-4 flex justify-around items-center', {
-        'line-through': todo?.completed,
+        'line-through': !isLoading && !isError && todo.completed,
       })}
     >
       {type === 'title' ? (

@@ -9,6 +9,7 @@ export const useAddTodo = () => {
     mutationFn: (todo: Omit<Todo, '_id' | 'completed'>) => addTodo(todo),
     onSuccess: () => {
       queryClient.invalidateQueries(['todos']);
+      queryClient.invalidateQueries(['todo']);
       toast.success('Todo added!');
     },
     onError: (error: Error) => {

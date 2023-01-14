@@ -7,9 +7,9 @@ export const useChangeTodo = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (body: Todo) => changeTodo(body),
-    onSuccess: () => {
+    onSuccess: (data) => {
       // Invalidate and refetch
-      queryClient.invalidateQueries(['todos']);
+      queryClient.invalidateQueries(['todo']);
       toast.success('Todo change is successful!');
     },
     onError: (error: Error) => {
