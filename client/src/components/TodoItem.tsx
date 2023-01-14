@@ -125,7 +125,7 @@ export const TodoItem: FC<TodoItemProps> = ({ todo }) => {
           suppressContentEditableWarning={true}
           onBlur={onBlur}
           ref={titleRef}
-          className="w-3/4"
+          className="w-3/4 font-medium"
           onFocus={onTitleFocus}
         >
           {todo.title}
