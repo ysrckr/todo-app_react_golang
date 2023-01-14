@@ -1,16 +1,16 @@
 import { useMutation, useQueryClient, QueryCache } from '@tanstack/react-query';
-import { toggleTodoStatus } from "../calls/toggleTodoStatus";
+import { changeTodo } from "../calls/changeTodo";
 import { Todo } from "../types";
 import { toast } from 'react-toastify';
 
-export const useToggleTodoStatus = () => {
+export const useChangeTodo = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (body: Todo) => toggleTodoStatus(body),
+    mutationFn: (body: Todo) => changeTodo(body),
     onSuccess: () => {
       // Invalidate and refetch
       queryClient.invalidateQueries(['todos']);
-      toast.success('Todo status toggled!');
+      toast.success('Todo change is successful!');
     },
     onError: (error: Error) => {
       toast.error(error.message);
