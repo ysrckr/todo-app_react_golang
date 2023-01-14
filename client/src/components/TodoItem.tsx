@@ -1,30 +1,33 @@
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
-import CloseIcon from '@mui/icons-material/Close';
-import { Todo } from '../types';
-import { FC, useRef, useState } from 'react';
-import { useDeleteTodo } from '../hooks/useDeleteTodo';
 import { useChangeTodo } from '../hooks/useChangeTodo';
-import cn from 'classnames';
-import { z } from 'zod';
-import { toast } from 'react-toastify';
+import { useDeleteTodo } from '../hooks/useDeleteTodo';
+import CloseIcon from '@mui/icons-material/Close';
+import { useGetTodo } from '../hooks/useGetTodo';
 import { TostifyError } from './TostifyError';
+import { FC, useRef, useState } from 'react';
+import { TodoColumn } from './TodoColumn';
+import { toast } from 'react-toastify';
+import { z } from 'zod';
 
 interface TodoItemProps {
-  todo: Todo;
+  id: string;
 }
 
-export const TodoItem: FC<TodoItemProps> = ({ todo }) => {
+export const TodoItem: FC<TodoItemProps> = ({ id }) => {
   const deleteMutation = useDeleteTodo();
   const changeTodoMutation = useChangeTodo();
+  const { data: todo, isError, isLoading } = useGetTodo(id);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const bodyRef = useRef<HTMLParagraphElement>(null);
   const [isEditing, setIsEditing] = useState({
     title: false,
     body: false,
   });
+
+  if (isLoading || isError) {
+    return null;
+  }
 
   const validation = () => {
     const titleSchema = z.string().min(1).max(50);
@@ -48,13 +51,21 @@ export const TodoItem: FC<TodoItemProps> = ({ todo }) => {
   };
 
   const onTitleFocus = () => {
+    if (titleRef.current !== null) {
+      titleRef.current.focus();
+    }
+
     setIsEditing(prev => ({
       ...prev,
       title: true,
-      }));
+    }));
   };
 
   const onBodyFocus = () => {
+    if (bodyRef.current !== null) {
+      bodyRef.current.focus();
+    }
+
     setIsEditing(prev => ({
       ...prev,
       body: true,
@@ -69,9 +80,13 @@ export const TodoItem: FC<TodoItemProps> = ({ todo }) => {
       body: false,
     });
 
-    if (title === null || body === null) {
-      titleRef.current!.innerText = todo.title;
-      bodyRef.current!.innerText = todo.body;
+    if (
+      (title === null || body === null) &&
+      titleRef.current !== null &&
+      bodyRef.current !== null
+    ) {
+      titleRef.current.innerText = todo.title;
+      bodyRef.current.innerText = todo.body;
       toast.error(
         <TostifyError errorMessage="Please do not leave the title or body empty." />,
       );
@@ -115,90 +130,22 @@ export const TodoItem: FC<TodoItemProps> = ({ todo }) => {
           {todo.completed ? <CheckCircleIcon /> : <CheckCircleOutlineIcon />}
         </button>
       </div>
-      <div
-        className={cn('col-span-2 p-4 flex justify-around items-center', {
-          'line-through': todo.completed,
-        })}
-      >
-        <h5
-          contentEditable={true}
-          suppressContentEditableWarning={true}
-          onBlur={onBlur}
-          ref={titleRef}
-          className="w-3/4 font-medium"
-          onFocus={onTitleFocus}
-        >
-          {todo.title}
-        </h5>
-        {isEditing.title ? (
-          <button
-            onClick={() => {
-              titleRef.current!.blur();
-
-              setIsEditing(prev => ({
-                ...prev,
-                title: false,
-              }));
-            }}
-          >
-            <BorderColorIcon className="text-purple-700" />
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              titleRef.current!.focus();
-              setIsEditing(prev => ({
-                ...prev,
-                title: true,
-              }));
-            }}
-          >
-            <ModeEditIcon className="text-purple-700" />
-          </button>
-        )}
-      </div>
-      <div
-        className={cn('col-span-2 p-4 flex justify-around items-center', {
-          'line-through': todo.completed,
-        })}
-      >
-        <p
-          contentEditable={true}
-          suppressContentEditableWarning={true}
-          onBlur={onBlur}
-          ref={bodyRef}
-          className="w-3/4"
-          onFocus={onBodyFocus}
-        >
-          {todo.body}
-        </p>
-        {isEditing.body ? (
-          <button
-            onClick={() => {
-              bodyRef.current!.blur();
-
-              setIsEditing(prev => ({
-                ...prev,
-                body: false,
-              }));
-            }}
-          >
-            <BorderColorIcon className="text-purple-700" />
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              bodyRef.current!.focus();
-              setIsEditing(prev => ({
-                ...prev,
-                body: true,
-              }));
-            }}
-          >
-            <ModeEditIcon className="text-purple-700" />
-          </button>
-        )}
-      </div>
+      <TodoColumn
+        id={todo._id}
+        type="title"
+        htmlRef={titleRef}
+        isEditing={isEditing.title}
+        onFocus={onTitleFocus}
+        onBlur={onBlur}
+      />
+      <TodoColumn
+        id={todo._id}
+        type="body"
+        htmlRef={bodyRef}
+        isEditing={isEditing.body}
+        onFocus={onBodyFocus}
+        onBlur={onBlur}
+      />
       <div>
         <button
           className="p-4"

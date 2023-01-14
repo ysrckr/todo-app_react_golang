@@ -1,7 +1,6 @@
-import { Container } from '@mantine/core';
-import { TodoItem } from './TodoItem';
 import { useGetTodos } from '../hooks/useGetTodos';
-import { Loader } from '@mantine/core';
+import { Container, Loader } from '@mantine/core';
+import { TodoItem } from './TodoItem';
 import { Error } from './Error';
 
 export const TodoList = () => {
@@ -32,7 +31,7 @@ export const TodoList = () => {
           todos.map(todo => (
             <TodoItem
               key={todo._id}
-              todo={todo}
+              id={todo._id}
             />
           ))
         )}
