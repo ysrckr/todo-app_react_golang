@@ -1,5 +1,5 @@
-import { Todo } from '../types';
 import { axiosInstance } from '../utils/axios-instance';
+import { Todo } from '../types';
 
 export const changeTodo = async (body: Todo) => {
   const { data } = await axiosInstance.patch<Todo>(`/${body._id}`, {

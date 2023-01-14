@@ -19,6 +19,7 @@ plugins:
   - react-hooks
   - prettier
   - import
+  - unused-imports
 rules:
   {
     'react/react-in-jsx-scope': 'off',
@@ -26,26 +27,28 @@ rules:
     'spaced-comment': 'error',
     'quotes': ['error', 'single'],
     'no-duplicate-imports': ['error', 'includeExports': true],
-    'no-unused-vars': ["error", {
-      'vars': 'all',
-      'args': 'after-used',
-      'ignoreRestSiblings': false
-    }],
-    'keyword-spacing': ['before', true],
-    'jsx-quotes': [2, 'prefer-double'],
-    'no-trailing-spaces':
-      ['error', { 'ignoreComments': true, 'prefer-template': true }],
-    'sort-imports':
+    '@typescript-eslint/no-unused-vars':
       [
         'error',
+        { 'vars': 'all', 'args': 'after-used', 'ignoreRestSiblings': false },
+      ],
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars':
+      [
+        'warn',
         {
-          'ignoreCase': false,
-          'ignoreDeclarationSort': false,
-          'ignoreMemberSort': false,
-          'memberSyntaxSortOrder': ['all', 'multiple', 'single', 'none'],
-          'allowSeparatedGroups': false,
+          'vars': 'all',
+          'varsIgnorePattern': '^_',
+          'args': 'after-used',
+          'argsIgnorePattern': '^_',
         },
       ],
+    'keyword-spacing': ['error', { 'before': true }],
+    'jsx-quotes': [2, 'prefer-double'],
+    'no-trailing-spaces': ['error', { 'ignoreComments': true }],
     'import/no-unresolved': 'error',
+    'prettier/prettier': 'error',
+    'arrow-body-style': 'off',
+    'prefer-arrow-callback': 'off',
   }
 settings: { 'import/resolver': { 'typescript': { true } } }

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addTodo } from '../calls/addTodo';
-import { Todo } from '../types';
 import { toast } from 'react-toastify';
+import { Todo } from '../types';
 
 export const useAddTodo = () => {
   const queryClient = useQueryClient();

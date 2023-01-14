@@ -1,7 +1,7 @@
-import { useMutation, useQueryClient, QueryCache } from '@tanstack/react-query';
-import { changeTodo } from "../calls/changeTodo";
-import { Todo } from "../types";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { changeTodo } from '../calls/changeTodo';
 import { toast } from 'react-toastify';
+import { Todo } from '../types';
 
 export const useChangeTodo = () => {
   const queryClient = useQueryClient();
@@ -16,5 +16,4 @@ export const useChangeTodo = () => {
       toast.error(error.message);
     },
   });
-}
-  
+};

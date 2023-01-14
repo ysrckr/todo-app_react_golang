@@ -1,5 +1,5 @@
+import { Button, Container, Group } from '@mantine/core';
 import { TodoList } from './components/TodoList';
-import { Group, Button, Container } from '@mantine/core';
 import { ToastContainer } from 'react-toastify';
 import { signal } from '@preact/signals-react';
 import { AddTodo } from './components/AddTodo';

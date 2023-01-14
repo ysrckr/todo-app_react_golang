@@ -1,5 +1,5 @@
-import { Button } from '@mantine/core';
 import { useGetTodos } from '../hooks/useGetTodos';
+import { Button } from '@mantine/core';
 import { useState } from 'react';
 
 export const Error = () => {

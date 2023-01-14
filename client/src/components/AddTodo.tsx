@@ -1,10 +1,10 @@
+import { Button, Group, Modal, TextInput, Textarea } from '@mantine/core';
 import { useAddTodo } from '../hooks/useAddTodo';
-import { useState } from 'react';
-import { TextInput, Textarea, Modal, Group, Button } from '@mantine/core';
-import { isOpen } from '../App';
-import { toast } from 'react-toastify';
-import { ModalTitle } from './ModalTitle';
 import { TostifyError } from './TostifyError';
+import { ModalTitle } from './ModalTitle';
+import { toast } from 'react-toastify';
+import { useState } from 'react';
+import { isOpen } from '../App';
 
 export const AddTodo = () => {
   const [title, setTitle] = useState('');
