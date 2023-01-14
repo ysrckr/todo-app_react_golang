@@ -2,45 +2,79 @@ import { useAddTodo } from '../hooks/useAddTodo';
 import { useState } from 'react';
 import { TextInput, Textarea, Modal, Group, Button } from '@mantine/core';
 import { isOpen } from '../App';
-
+import { toast } from 'react-toastify';
+import { ModalTitle } from './ModalTitle';
+import { TostifyError } from './TostifyError';
 
 export const AddTodo = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const [error, setError] = useState(false);
 
   const addTodoMutation = useAddTodo();
 
   const handleAddTodo = () => {
+    if (!title) {
+      toast.error(
+        <TostifyError errorMessage="Please fill in the Title field" />,
+      );
+      setError(true);
+      return;
+    }
+
+    if (!body) {
+      toast.error(
+        <TostifyError errorMessage="Please fill in the Body field" />,
+      );
+      setError(true);
+      return;
+    }
+
     addTodoMutation.mutate({ title, body });
     isOpen.value = false;
     setTitle('');
     setBody('');
+    setError(false);
   };
 
   return (
     <Modal
       opened={isOpen.value}
-      onClose={() => isOpen.value = false}
-      title="Add a new todo"
+      onClose={() => {
+        isOpen.value = false;
+        setTitle('');
+        setBody('');
+        setError(false);
+      }}
+      title={<ModalTitle />}
       centered
-      size={400}
+      size={600}
     >
       <TextInput
         placeholder="What would you like to do?"
         label="Title"
+        error={error && !title && 'Please fill in the title field'}
         withAsterisk
         required
         value={title}
-        onChange={e => setTitle(e.currentTarget.value)}
+        onChange={e => {
+          setTitle(e.currentTarget.value);
+          setError(false);
+        }}
+        sx={{ marginBottom: 40 }}
       />
 
       <Textarea
         placeholder="Tell me more about it..."
         label="Body"
+        error={error && !body && 'Please fill in the body field'}
         withAsterisk
         required
         value={body}
-        onChange={e => setBody(e.currentTarget.value)}
+        onChange={e => {
+          setBody(e.currentTarget.value);
+          setError(false);
+        }}
       />
 
       <Group
